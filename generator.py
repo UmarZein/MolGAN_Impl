@@ -1,9 +1,10 @@
 import torch
 from torch import nn
 from constants import *
-
+import mlp
 
 class Generator(nn.Module):
+    'deepchem ref: https://github.com/deepchem/deepchem/blob/master/deepchem/models/torch_models/molgan.py#L256'
     def __init__(self, z_dim, dims, A_dims, X_dims, N, dropout_rate=0.1):
         '''
         z_dim: int
@@ -15,7 +16,7 @@ class Generator(nn.Module):
         dropout_rate: float
                      A_dims --> R^{N, N, len(BONDS})}
         z --> dims <
-                     X_dims --> R^{N, len(MOLS)+1}
+                     X_dims --> R^{N, len(MOLS)}
         '''
         super().__init__()
         self.z_dim=z_dim
@@ -23,52 +24,28 @@ class Generator(nn.Module):
         self.N=N
         main_dims=[z_dim]+dims
         a_dims=main_dims[-1:]+A_dims+[len(BONDS)*(N**2)]
-        x_dims=main_dims[-1:]+X_dims+[N*(len(MOLS)+1)] # +1 because apparently empty attoms are included
-        self.main_mlp = nn.Sequential(
-            *[
-                x
-                for xs in [(
-                    nn.Linear(main_dims[i],main_dims[i+1]),
-                    nn.Tanh(),
-                    nn.Dropout(self.do_rate),
-                ) for i in range(len(main_dims)-1)]
-                for x in xs
-            ]
-        )
-        self.a_mlp = nn.Sequential(
-            *[
-                x
-                for xs in [(
-                    nn.Linear(a_dims[i],a_dims[i+1]),
-                    nn.Tanh(),
-                    nn.Dropout(self.do_rate),
-                ) if i+1<len(a_dims)-1 else (
-                    nn.Linear(a_dims[i],a_dims[i+1]),
-                    nn.Dropout(self.do_rate),
-                ) for i in range(len(a_dims)-1)]
-                for x in xs
-            ]
-        )
-        self.x_mlp = nn.Sequential(
-            *[
-                x
-                for xs in [(
-                    nn.Linear(x_dims[i],x_dims[i+1]),
-                    nn.Tanh(),
-                    nn.Dropout(self.do_rate),
-                ) if i+1<len(x_dims)-1 else (
-                    nn.Linear(x_dims[i],x_dims[i+1]),
-                    nn.Dropout(self.do_rate),
-                ) for i in range(len(x_dims)-1)]
-                for x in xs
-            ]
-        )
+        x_dims=main_dims[-1:]+X_dims+[N*len(MOLS)]
+        self.main_mlp = mlp.MLP(main_dims[0],main_dims[1:-1],main_dims[-1], dropout_rate=self.do_rate)
+        self.a_mlp = mlp.MLP(a_dims[0],a_dims[1:-1],a_dims[-1],final_activation=None, dropout_rate=self.do_rate)
+        self.x_mlp = mlp.MLP(x_dims[0],x_dims[1:-1],x_dims[-1],final_activation=None, dropout_rate=self.do_rate)
     def generate(self, z):
         base=self.main_mlp(z)
         a=self.a_mlp(base).view(-1,len(BONDS), self.N, self.N)
-        x=self.x_mlp(base).view(-1,self.N,len(MOLS)+1) # +1 because apparently empty attoms are included
-        return {
-            'A':a,
-            'X':x,
-        }
         
+        a=(a+a.transpose(-1,-2))/2 # the adjacency matrix should be symmetrical, I think
+        
+
+        
+        a*=1-torch.eye(a.shape[-1]) # remove self-loop adjacency. 
+                                    # Why? Because in RGCN paper (https://arxiv.org/pdf/1703.06103) eq. (2),
+                                    # We see on the right-side of the equation, therein on the right side 
+                                    # is W_0^{(l)}h_i^{(l)} This makes me think that if we dont remove it in this stage
+                                    # self-loop will be done twice
+                                    # 
+                                    # Also, think about it, in molecules, atoms are not connected to themselves 
+        
+        x=self.x_mlp(base).view(-1,self.N,len(MOLS))
+
+        a=a.softmax(-3)#softmax over the relation-type dimension
+        x=x.softmax(-1)#softmax over the atom_type dimension
+        return (x,a)

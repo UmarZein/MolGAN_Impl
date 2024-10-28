@@ -1,98 +1,63 @@
 import torch
 from torch import nn
+from constants import *
+from rgcn import RGCNLayer
+import mlp
 
-class RGCNLayer(nn.Module):
-    'https://arxiv.org/pdf/1703.06103'
-    def __init__(self, num_relations, in_dim, out_dim):
+# Rewarder and discriminator are largely the same thing
+
+class Discriminator(nn.Module):
+    'Implementation of eq. (6) of Molgan Paper https://arxiv.org/abs/1805.11973v2'
+    def __init__(self, input_dim, rgcn_dims, i_dims, j_dims, final_mlp_dims, do_rate=0.1):
         super().__init__()
-        self.num_relations=num_relations
-        self.in_dim=in_dim
-        self.out_dim=out_dim
-        self.wr=nn.Parameter(torch.empty(num_relations, in_dim, out_dim))
-        self.w0=nn.Parameter(torch.empty(in_dim, out_dim))
-        self.init_weights()
-    def init_weights(self):
-        torch.nn.init.xavier_uniform_(self.wr)
-        torch.nn.init.xavier_uniform_(self.w0)
-    def forward(self, 
-                X, #X: (B*, N, in_dim) 
-                A, #A: (B*, num_relations, N, N)
-               ):
-        # h_i^{l+1} = act(left_side^{l} + right_side^{l})
-        # see eq. (2) in the paper
-        # we decide to use neither basis-decomposition nor block-diagonal-decomposition
-        # because molecules can have at most 4 edge types, including disonnected edge type
-        right_side=X@self.w0
-
-        tmp1 = torch.einsum(X, [..., 0, 1], self.wr, [2, 1, 3], [..., 0, 2, 3]).transpose(-3,-2)
-        tmp2 = (A@tmp1)
-        cir = A.sum(-1).unsqueeze(-1)
-        left_side = tmp2.div(cir).sum(-3)
+        assert len(rgcn_dims)>0
+        assert i_dims[-1]==j_dims[-1]
+        self.dims0=[input_dim]+rgcn_dims
+        self.idims=[input_dim+rgcn_dims[-1]]+i_dims
+        self.jdims=[input_dim+rgcn_dims[-1]]+j_dims
+        self.final_mlp_dims=[i_dims[-1]]+final_mlp_dims+[1]
+        self.do_rate=do_rate
+        self.layers = nn.Sequential(
+            *[
+                x
+                for xs in [(
+                    RGCNLayer(self.dims0[i],self.dims0[i+1], do_rate=self.do_rate),#RGCN already includes an activation function (tanh)
+                ) if i+1<len(self.dims0)-1 else (
+                    RGCNLayer(self.dims0[i],self.dims0[i+1], do_rate=self.do_rate),
+                ) for i in range(len(self.dims0)-1)]
+                for x in xs
+            ]
+        )
+        self.i = nn.Sequential(
+            *[
+                x
+                for xs in [(
+                    RGCNLayer(self.idims[i],self.idims[i+1], do_rate=self.do_rate),#RGCN already includes an activation function (tanh)
+                ) if i+1<len(self.idims)-1 else (
+                    RGCNLayer(self.idims[i],self.idims[i+1], do_rate=self.do_rate, activation_function=nn.functional.sigmoid),
+                ) for i in range(len(self.idims)-1)]
+                for x in xs
+            ]
+        )
+        self.j = nn.Sequential(
+            *[
+                x
+                for xs in [(
+                    RGCNLayer(self.jdims[i],self.jdims[i+1], do_rate=self.do_rate),#RGCN already includes an activation function (tanh)
+                ) if i+1<len(self.jdims)-1 else (
+                    RGCNLayer(self.jdims[i],self.jdims[i+1], do_rate=0.0, activation_function=nn.functional.sigmoid),
+                ) for i in range(len(self.jdims)-1)]
+                for x in xs
+            ]
+        )
+        self.final_mlp = mlp.MLP(self.final_mlp_dims[0],self.final_mlp_dims[1:-1],self.final_mlp_dims[-1],final_activation=None, dropout_rate=self.do_rate)
+    def forward(self, inputs):
+        x0,a=inputs
+        h,_= self.layers(inputs)
+        h=torch.cat([x0,h],-1)
+        (i_out,_) = self.i((h,a))
+        (j_out,_) = self.j((h,a))
+        h=(i_out*j_out).sum(-2).tanh()
         
-        return (left_side+right_side).tanh()
-    def forward_old(self, 
-                X, #X: (B*, N, in_dim) 
-                A, #A: (B*, num_relations, N, N)
-               ):
-        # h_i^{l+1} = left_side^{l} + right_side^{l}
-        # see eq. (2) in the paper
-        # we decide to use neither basis-decomposition nor block-diagonal-decomposition
-        # because molecules can have at most 4 edge types, including disonnected edge type
-        right_side=X@self.w0
-
-        # GCN: X@A@W
-        
-        left_side = torch.zeros_like(right_side)
-        tmp1s=[]
-        tmp2s=[]
-        # A: (B*, num_relations, N, N)
-        # A.sum(-1): (B*, num_relations, N)
-        # X: (B*, N, in_dim) 
-        # W: (num_relations, in_dim, out_dim)
-        # tmp1: (B*, N, num_relations, out_dim)
-        for i in range(A.shape[-3]):
-            A_ = A[...,i,:,:]
-            cir = A_.sum(-1).unsqueeze(-1) # either sum(-1) or sum(-2)
-            tmp1=(X@self.wr[i])
-            tmp1s.append(tmp1.detach())
-            tmp2=A_@tmp1
-            tmp2s.append(tmp2.detach())
-            #print(A.shape, A_.shape, X.shape, self.wr.shape, cir.shape, tmp1.shape, tmp2.shape)
-            left_side += tmp2/cir
-            
-        tmp1_alt = torch.einsum(X, [..., 0, 1], self.wr, [2, 1, 3], [..., 0, 2, 3]).transpose(-3,-2)
-        #tmp1_alt == torch.stack(tmp1s)
-        tmp2_alt = (A@tmp1_alt) #: (B*, num_relations, N, out_dim)
-        cir_alt = A.sum(-1).unsqueeze(-1) #: (B*, num_relations, N, 1)
-        left_side_alt = tmp2_alt.div(cir_alt).sum(-3)
-        
-        return left_side,right_side,tmp1s,tmp2s,tmp1_alt,tmp2_alt,left_side_alt
-
-    #def forward2(self, 
-    #            X, #X: (B*, N, in_dim) 
-    #            A, #A: (B*, num_relations, N, N)
-    #           ):
-    #    # h_i^{l+1} = left_side^{l} + right_side^{l}
-    #    # see eq. (2) in the paper
-    #    # we decide to use neither basis-decomposition nor block-diagonal-decomposition
-    #    # because molecules can have at most 4 edge types, including disonnected edge type
-    #    right_side=X@self.w0
-    #
-    #    # GCN: X@A@W
-    #    
-    #    left_side = torch.zeros_like(right_side)
-    #    # A: (B*, num_relations, N, N)
-    #    # A.sum(-1): (B*, num_relations, N)
-    #    # X: (B*, N, in_dim) 
-    #    # W: (num_relations, in_dim, out_dim)
-    #    # tmp1: (B*, N, num_relations, out_dim)
-    #    
-    #    for i in range(A.shape[-3]):
-    #        A_ = A[...,i,:,:]
-    #        cir = A_.sum(-1).unsqueeze(-1) # either sum(-1) or sum(-2)
-    #        tmp1=(X@self.wr[i])
-    #        tmp2=A_@tmp1
-    #        #print(A.shape, A_.shape, X.shape, self.wr.shape, cir.shape, tmp1.shape, tmp2.shape)
-    #        left_side += tmp2/cir
-    #        
-    #    return right_side,left_side
+        h=self.final_mlp(h)
+        return h,a
