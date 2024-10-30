@@ -32,8 +32,10 @@ class RGCNLayer(nn.Module):
 
         tmp1 = torch.einsum(X, [..., 0, 1], self.wr, [2, 1, 3], [..., 0, 2, 3]).transpose(-3,-2)
         tmp2 = (A@tmp1)
-        cir = A.sum(-1).unsqueeze(-1)
-        left_side = tmp2.div(cir).sum(-3)
+        cir = (A.sum(-1).unsqueeze(-1))
+        #tmp2_div_cir = torch.where((tmp2 == 0) & (cir == 0), torch.tensor(0.0), tmp2 / cir)
+        tmp2_div_cir = tmp2 / (cir+1e-9)
+        left_side = tmp2_div_cir.sum(-3)
         new_x=nn.functional.dropout(self.activation_function(left_side+right_side),p=self.do_rate)
         return new_x,A
     def forward_old(self, 

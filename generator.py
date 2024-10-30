@@ -5,7 +5,7 @@ import mlp
 
 class Generator(nn.Module):
     'deepchem ref: https://github.com/deepchem/deepchem/blob/master/deepchem/models/torch_models/molgan.py#L256'
-    def __init__(self, z_dim, dims, A_dims, X_dims, N, dropout_rate=0.1):
+    def __init__(self, z_dim, dims, A_dims, X_dims, N, dropout_rate=DEFAULT_DO_RATE):
         '''
         z_dim: int
         dims: List[int]

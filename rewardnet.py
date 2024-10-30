@@ -8,13 +8,14 @@ import mlp
 
 class Rewarder(nn.Module):
     'Implementation of eq. (6) of Molgan Paper https://arxiv.org/abs/1805.11973v2'
-    def __init__(self, input_dim, rgcn_dims, i_dims, j_dims, final_mlp_dims, do_rate=0.1):
+    def __init__(self, rgcn_dims, i_dims, j_dims, final_mlp_dims, do_rate=DEFAULT_DO_RATE):
         super().__init__()
+        self.input_dim=len(MOLS)
         assert len(rgcn_dims)>0
         assert i_dims[-1]==j_dims[-1]
-        self.dims0=[input_dim]+rgcn_dims
-        self.idims=[input_dim+rgcn_dims[-1]]+i_dims
-        self.jdims=[input_dim+rgcn_dims[-1]]+j_dims
+        self.dims0=[self.input_dim]+rgcn_dims
+        self.idims=[self.input_dim+rgcn_dims[-1]]+i_dims
+        self.jdims=[self.input_dim+rgcn_dims[-1]]+j_dims
         self.final_mlp_dims=[i_dims[-1]]+final_mlp_dims+[1]
         self.do_rate=do_rate
         self.layers = nn.Sequential(
@@ -50,7 +51,8 @@ class Rewarder(nn.Module):
                 for x in xs
             ]
         )
-        self.final_mlp = mlp.MLP(self.final_mlp_dims[0],self.final_mlp_dims[1:-1],self.final_mlp_dims[-1],final_activation=nn.Sigmoid, dropout_rate=self.do_rate)
+        self.final_mlp = mlp.MLP(self.final_mlp_dims[0],self.final_mlp_dims[1:-1],self.final_mlp_dims[-1],
+                                 final_activation=nn.Sigmoid, dropout_rate=self.do_rate)
     def forward(self, inputs):
         x0,a=inputs
         h,_= self.layers(inputs)
@@ -58,6 +60,5 @@ class Rewarder(nn.Module):
         (i_out,_) = self.i((h,a))
         (j_out,_) = self.j((h,a))
         h=(i_out*j_out).sum(-2).tanh()
-        
         h=self.final_mlp(h)
         return h,a
