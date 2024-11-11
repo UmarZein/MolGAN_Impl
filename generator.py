@@ -28,7 +28,7 @@ class Generator(nn.Module):
         self.main_mlp = mlp.MLP(main_dims[0],main_dims[1:-1],main_dims[-1], dropout_rate=self.do_rate)
         self.a_mlp = mlp.MLP(a_dims[0],a_dims[1:-1],a_dims[-1],final_activation=None, dropout_rate=self.do_rate)
         self.x_mlp = mlp.MLP(x_dims[0],x_dims[1:-1],x_dims[-1],final_activation=None, dropout_rate=self.do_rate)
-    def generate(self, z):
+    def forward(self, z):
         base=self.main_mlp(z)
         a=self.a_mlp(base).view(-1,len(BONDS), self.N, self.N)
         

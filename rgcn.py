@@ -4,13 +4,13 @@ from constants import *
 
 class RGCNLayer(nn.Module):
     'https://arxiv.org/pdf/1703.06103'
-    def __init__(self, in_dim, out_dim, do_rate, activation_function=nn.functional.tanh):
+    def __init__(self, in_dim, out_dim, do_rate, activation=nn.Tanh):
         super().__init__()
-        self.num_relations=len(BONDS)
+        self.num_relations=len(BONDS)-1
         self.in_dim=in_dim
         self.out_dim=out_dim
         self.do_rate=do_rate
-        self.activation_function=activation_function
+        self.activation_function=activation()
         self.wr=nn.Parameter(torch.empty(self.num_relations, in_dim, out_dim))
         self.w0=nn.Parameter(torch.empty(in_dim, out_dim))
         self.init_weights()
@@ -19,10 +19,13 @@ class RGCNLayer(nn.Module):
         torch.nn.init.xavier_uniform_(self.w0)
     def forward(self, 
                 inputs, 
+                use_old=False
                 #inputs = (X,A) 
                 #X: (B*, N, in_dim) ; x_v^{(l)} synonymous with h_v^{(l)}
                 #A: (B*, num_relations, N, N)
                ):
+        if use_old:
+            raise Exception("use_old is not allowed")
         X,A=inputs
         # h_i^{l+1} = act(left_side^{l} + right_side^{l})
         # see eq. (2) in the paper
@@ -31,17 +34,33 @@ class RGCNLayer(nn.Module):
         right_side=X@self.w0
 
         tmp1 = torch.einsum(X, [..., 0, 1], self.wr, [2, 1, 3], [..., 0, 2, 3]).transpose(-3,-2)
-        tmp2 = (A@tmp1)
-        cir = (A.sum(-1).unsqueeze(-1))
+        #we use A[...,1:,:,:] <- the 1: is important because A[...,0,:,:] is the ZERO BOND therefor they shouldn't propagate
+        tmp2 = (A[...,1:,:,:]@tmp1)
+        cir = (A[...,1:,:,:].sum(-1).unsqueeze(-1))
+        #print(cir.shape, tmp2.shape)
+        #raise Exception("Bruh")
+        # Method 1 (error in back propagation)
         #tmp2_div_cir = torch.where((tmp2 == 0) & (cir == 0), torch.tensor(0.0), tmp2 / cir)
+        
+        # Method 2 (bad feeling about this, because of epsilon)
         tmp2_div_cir = tmp2 / (cir+1e-9)
+        
+        # Method 3
+        #tmp2_div_cir = tmp2*torch.where(cir==0.0, 0.0, 1/cir)
+        
+        
         left_side = tmp2_div_cir.sum(-3)
-        new_x=nn.functional.dropout(self.activation_function(left_side+right_side),p=self.do_rate)
-        return new_x,A
-    def forward_old(self, 
-                X, #X: (B*, N, in_dim) 
-                A, #A: (B*, num_relations, N, N)
-               ):
+        h = left_side+right_side
+        if self.activation_function is not None:
+            h =self.activation_function(h)
+        h=nn.functional.dropout(h,p=self.do_rate)
+        return h,A
+    def forward_old(self, inputs):
+        X,A=inputs
+        #X: (B*, N, in_dim) 
+        #A: (B*, num_relations, N, N)
+
+        
         # h_i^{l+1} = left_side^{l} + right_side^{l}
         # see eq. (2) in the paper
         # we decide to use neither basis-decomposition nor block-diagonal-decomposition
@@ -51,56 +70,82 @@ class RGCNLayer(nn.Module):
         # GCN: X@A@W
         
         left_side = torch.zeros_like(right_side)
-        tmp1s=[]
-        tmp2s=[]
         # A: (B*, num_relations, N, N)
         # A.sum(-1): (B*, num_relations, N)
         # X: (B*, N, in_dim) 
         # W: (num_relations, in_dim, out_dim)
         # tmp1: (B*, N, num_relations, out_dim)
-        for i in range(A.shape[-3]):
+        for i in range(1,A.shape[-3]):
             A_ = A[...,i,:,:]
             cir = A_.sum(-1).unsqueeze(-1) # either sum(-1) or sum(-2)
             tmp1=(X@self.wr[i])
-            tmp1s.append(tmp1.detach())
             tmp2=A_@tmp1
-            tmp2s.append(tmp2.detach())
-            #print(A.shape, A_.shape, X.shape, self.wr.shape, cir.shape, tmp1.shape, tmp2.shape)
-            left_side += tmp2/cir
-            
-        tmp1_alt = torch.einsum(X, [..., 0, 1], self.wr, [2, 1, 3], [..., 0, 2, 3]).transpose(-3,-2)
-        #tmp1_alt == torch.stack(tmp1s)
-        tmp2_alt = (A@tmp1_alt) #: (B*, num_relations, N, out_dim)
-        cir_alt = A.sum(-1).unsqueeze(-1) #: (B*, num_relations, N, 1)
-        left_side_alt = tmp2_alt.div(cir_alt).sum(-3)
-        
-        return left_side,right_side,tmp1s,tmp2s,tmp1_alt,tmp2_alt,left_side_alt
+            left_side += tmp2*torch.where(cir==0.0, 0.0, 1/cir)
 
-    #def forward2(self, 
-    #            X, #X: (B*, N, in_dim) 
-    #            A, #A: (B*, num_relations, N, N)
-    #           ):
-    #    # h_i^{l+1} = left_side^{l} + right_side^{l}
-    #    # see eq. (2) in the paper
-    #    # we decide to use neither basis-decomposition nor block-diagonal-decomposition
-    #    # because molecules can have at most 4 edge types, including disonnected edge type
-    #    right_side=X@self.w0
-    #
-    #    # GCN: X@A@W
-    #    
-    #    left_side = torch.zeros_like(right_side)
-    #    # A: (B*, num_relations, N, N)
-    #    # A.sum(-1): (B*, num_relations, N)
-    #    # X: (B*, N, in_dim) 
-    #    # W: (num_relations, in_dim, out_dim)
-    #    # tmp1: (B*, N, num_relations, out_dim)
-    #    
-    #    for i in range(A.shape[-3]):
-    #        A_ = A[...,i,:,:]
-    #        cir = A_.sum(-1).unsqueeze(-1) # either sum(-1) or sum(-2)
-    #        tmp1=(X@self.wr[i])
-    #        tmp2=A_@tmp1
-    #        #print(A.shape, A_.shape, X.shape, self.wr.shape, cir.shape, tmp1.shape, tmp2.shape)
-    #        left_side += tmp2/cir
-    #        
-    #    return right_side,left_side
+        new_x=nn.functional.dropout(self.activation_function(left_side+right_side),p=self.do_rate)
+        
+        return new_x,A
+
+class RGCN(nn.Module):
+    def __init__(self, input_dim, dims, output_dim, activation=nn.Tanh, final_activation=nn.Tanh, dropout_rate=0.1):
+        super().__init__()
+        self.dims=[input_dim]+dims+[output_dim]
+        self.do_rate=dropout_rate
+        self.layers = nn.Sequential(
+            *[
+                x
+                for xs in [(
+                    RGCNLayer(self.dims[i],self.dims[i+1], activation=activation, do_rate=self.do_rate),
+                ) if i+1<len(self.dims)-1 else (
+                    RGCNLayer(self.dims[i],self.dims[i+1], activation=final_activation, do_rate=self.do_rate),
+                ) if final_activation is not None else (
+                    RGCNLayer(self.dims[i],self.dims[i+1], activation=None, do_rate=self.do_rate),
+                )  for i in range(len(self.dims)-1)]
+                for x in xs
+            ]
+        )
+    def forward(self, x):
+        return self.layers(x)
+
+
+
+
+
+# class RGCNL(Function):
+#     @staticmethod
+#     def forward(ctx, input, adj, W_r, W_0):
+#         # Save inputs and parameters for backward
+#         ctx.save_for_backward(input, adj, W_r, W_0)
+#         
+#         # Apply relational transformation
+#         output = torch.zeros_like(input)
+#         for r in range(len(W_r)):
+#             output += adj[r] @ (input @ W_r[r])  # Relation-based transformations
+#         output += input @ W_0  # Self-loop transformation
+#         return output
+# 
+#     @staticmethod
+#     def backward(ctx, grad_output):
+#         input, adj, W_r, W_0 = ctx.saved_tensors
+#         grad_input = grad_W_r = grad_W_0 = None
+# 
+#         # Calculate gradients for each saved tensor
+#         if ctx.needs_input_grad[0]:
+#             grad_input = torch.zeros_like(input)
+#             for r in range(len(W_r)):
+#                 grad_input += adj[r].t() @ (grad_output @ W_r[r].t())
+#             grad_input += grad_output @ W_0.t()
+# 
+#         if ctx.needs_input_grad[2]:  # W_r gradients
+#             grad_W_r = [adj[r].t() @ (input.t() @ grad_output) for r in range(len(W_r))]
+# 
+#         if ctx.needs_input_grad[3]:  # W_0 gradient
+#             grad_W_0 = input.t() @ grad_output
+# 
+#         return grad_input, None, grad_W_r, grad_W_0
+
+
+
+
+
+

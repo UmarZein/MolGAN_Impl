@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 from constants import *
-from rgcn import RGCNLayer
+from rgcn import RGCN
 import mlp
 
 # Rewarder and discriminator are largely the same thing
@@ -18,47 +18,25 @@ class Discriminator(nn.Module):
         self.jdims=[self.input_dim+rgcn_dims[-1]]+j_dims
         self.final_mlp_dims=[i_dims[-1]]+final_mlp_dims+[1]
         self.do_rate=do_rate
-        self.layers = nn.Sequential(
-            *[
-                x
-                for xs in [(
-                    RGCNLayer(self.dims0[i],self.dims0[i+1], do_rate=self.do_rate),#RGCN already includes an activation function (tanh)
-                ) if i+1<len(self.dims0)-1 else (
-                    RGCNLayer(self.dims0[i],self.dims0[i+1], do_rate=self.do_rate),
-                ) for i in range(len(self.dims0)-1)]
-                for x in xs
-            ]
-        )
-        self.i = nn.Sequential(
-            *[
-                x
-                for xs in [(
-                    RGCNLayer(self.idims[i],self.idims[i+1], do_rate=self.do_rate),#RGCN already includes an activation function (tanh)
-                ) if i+1<len(self.idims)-1 else (
-                    RGCNLayer(self.idims[i],self.idims[i+1], do_rate=self.do_rate, activation_function=nn.functional.sigmoid),
-                ) for i in range(len(self.idims)-1)]
-                for x in xs
-            ]
-        )
-        self.j = nn.Sequential(
-            *[
-                x
-                for xs in [(
-                    RGCNLayer(self.jdims[i],self.jdims[i+1], do_rate=self.do_rate),#RGCN already includes an activation function (tanh)
-                ) if i+1<len(self.jdims)-1 else (
-                    RGCNLayer(self.jdims[i],self.jdims[i+1], do_rate=0.0, activation_function=nn.functional.sigmoid),
-                ) for i in range(len(self.jdims)-1)]
-                for x in xs
-            ]
-        )
+        self.layers = RGCN(self.dims0[0],self.dims0[1:-1],self.dims0[-1], 
+                           dropout_rate=self.do_rate)
+        self.i = mlp.MLP(self.idims[0],self.idims[1:-1],self.idims[-1],
+                                 final_activation=nn.Sigmoid, dropout_rate=self.do_rate)
+        self.j = mlp.MLP(self.jdims[0],self.jdims[1:-1],self.jdims[-1],
+                                 final_activation=nn.Tanh, dropout_rate=self.do_rate)
         self.final_mlp = mlp.MLP(self.final_mlp_dims[0],self.final_mlp_dims[1:-1],self.final_mlp_dims[-1],
                                  final_activation=None, dropout_rate=self.do_rate)
-    def forward(self, inputs):
+    def forward(self, inputs, use_old=False):
         x0,a=inputs
-        h,_= self.layers(inputs)
+        if use_old:
+            h=x0
+            for l in self.layers:
+                h,_=l((h,a),use_old=True)
+        else:
+            h,_= self.layers(inputs)#(B, N, H)
         h=torch.cat([x0,h],-1)
-        (i_out,_) = self.i((h,a))
-        (j_out,_) = self.j((h,a))
+        i_out = self.i(h)
+        j_out = self.j(h)
         h=(i_out*j_out).sum(-2).tanh()
         h=self.final_mlp(h)
-        return h,a
+        return h
