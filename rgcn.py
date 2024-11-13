@@ -43,10 +43,10 @@ class RGCNLayer(nn.Module):
         #tmp2_div_cir = torch.where((tmp2 == 0) & (cir == 0), torch.tensor(0.0), tmp2 / cir)
         
         # Method 2 (bad feeling about this, because of epsilon)
-        tmp2_div_cir = tmp2 / (cir+1e-9)
+        #tmp2_div_cir = tmp2 / (cir+1e-9)
         
         # Method 3
-        #tmp2_div_cir = tmp2*torch.where(cir==0.0, 0.0, 1/cir)
+        tmp2_div_cir = tmp2*torch.where(cir==0.0, 0.0, 1/cir)
         
         
         left_side = tmp2_div_cir.sum(-3)

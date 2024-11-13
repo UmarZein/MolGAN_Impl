@@ -24,9 +24,9 @@ MOLS = {
     53: 'I',
 }
 
-GP_LAMBDA = 10.0
+GP_LAMBDA = 10.0#10.0
 
-WGAN_BIAS_LAMBDA = 0.01
+WGAN_BIAS_LAMBDA = 0.01#0.01
 
 def sample(*shape):
     return torch.randn(*shape)

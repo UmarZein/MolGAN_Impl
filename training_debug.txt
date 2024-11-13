@@ -1,0 +1,448 @@
+         58661920 function calls (50549753 primitive calls) in 316.735 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    20000   69.739    0.003   69.739    0.003 {method 'run_backward' of 'torch._C._EngineBase' objects}
+845000/425000   23.393    0.000   23.765    0.000 {method 'item' of 'torch._C.TensorBase' objects}
+431014/215507   16.709    0.000   16.874    0.000 {method 'cpu' of 'torch._C.TensorBase' objects}
+580000/290000   16.647    0.000   16.913    0.000 {built-in method torch._C._nn.linear}
+  6101864   15.342    0.000  213.734    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_device.py:73(__torch_function__)
+    80000    9.412    0.000    9.412    0.000 {built-in method torch.einsum}
+   160000    9.234    0.000    9.234    0.000 {method 'matmul' of 'torch._C.TensorBase' objects}
+   370000    8.304    0.000    8.304    0.000 {built-in method torch.dropout}
+    20000    6.645    0.000    6.645    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\Crippen.py:170(<lambda>)
+    15632    6.165    0.000    6.165    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:259(<genexpr>)
+        1    5.701    5.701  316.922  316.922 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\3200201438.py:13(train)
+    10000    5.165    0.001   26.330    0.003 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\1618320290.py:1(mol_from_graph)
+    80000    4.811    0.000   58.296    0.001 C:\Users\umarzein\Desktop\MolGAN\rgcn.py:20(forward)
+400000/200000    4.725    0.000    4.890    0.000 {method 'sum' of 'torch._C.TensorBase' objects}
+540000/270000    4.621    0.000    4.850    0.000 {built-in method torch.tanh}
+     5000    4.322    0.001   12.219    0.002 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\97489033.py:1(graph_from_smiles)
+    10000    4.239    0.000   15.802    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:243(properties)
+1420000/50000    3.751    0.000  111.762    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:1513(_call_impl)
+160000/80000    3.737    0.000    3.825    0.000 {built-in method torch.where}
+    58962    3.274    0.000    3.274    0.000 {method 'acquire' of '_thread.lock' objects}
+321014/160507    2.951    0.000    3.050    0.000 {method 'argmax' of 'torch._C.TensorBase' objects}
+   160000    2.885    0.000    2.885    0.000 {method 'mul' of 'torch._C.TensorBase' objects}
+   605000    2.883    0.000  109.361    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\overrides.py:1557(handle_torch_function)
+740000/370000    2.241    0.000   17.345    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\functional.py:1252(dropout)
+    10000    2.172    0.000    3.850    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:144(_compute_SAS)
+   125000    2.055    0.000    2.055    0.000 {method 'add' of 'torch._C.TensorBase' objects}
+   190000    1.937    0.000  100.444    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\container.py:215(forward)
+160000/80000    1.919    0.000   14.890    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\functional.py:193(einsum)
+    15000    1.774    0.000    2.796    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:90(_init_group)
+    80000    1.764    0.000    1.764    0.000 {method 'eq' of 'torch._C.TensorBase' objects}
+   605000    1.727    0.000    2.308    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\overrides.py:1485(_get_overloaded_args)
+1420000/50000    1.617    0.000  111.877    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:1507(_wrapped_call_impl)
+  1430000    1.562    0.000    1.562    0.000 {built-in method torch._C._get_tracing_state}
+    80000    1.539    0.000    2.750    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:943(__rdiv__)
+    10000    1.354    0.000    1.356    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\__init__.py:80(FindMolChiralCenters)
+  1315000    1.331    0.000    1.331    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:1675(__getattr__)
+341014/170507    1.328    0.000    1.483    0.000 {method 'numpy' of 'torch._C.TensorBase' objects}
+80000/40000    1.318    0.000    1.364    0.000 {built-in method torch.cat}
+20000/10000    1.314    0.000    1.330    0.000 {method 'argwhere' of 'torch._C.TensorBase' objects}
+    80000    1.211    0.000    1.211    0.000 {method 'reciprocal' of 'torch._C.TensorBase' objects}
+30000/15000    1.195    0.000    1.216    0.000 {built-in method torch._foreach_sqrt}
+501014/250507    1.137    0.000    1.299    0.000 {method 'detach' of 'torch._C.TensorBase' objects}
+20000/10000    1.127    0.000    1.178    0.000 {built-in method torch.randn}
+180000/90000    1.120    0.000    1.254    0.000 {method 'transpose' of 'torch._C.TensorBase' objects}
+40000/20000    1.106    0.000    2.537    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\functional.py:1864(gumbel_softmax)
+1985000/420000    1.070    0.000    1.175    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:2333(named_modules)
+80000/40000    1.058    0.000    1.102    0.000 {built-in method torch.sigmoid}
+    40000    1.020    0.000   99.423    0.002 C:\Users\umarzein\Desktop\MolGAN\discriminator.py:29(forward)
+   605002    1.000    0.000    1.182    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\contextlib.py:102(__init__)
+60000/30000    0.943    0.000    0.980    0.000 {built-in method torch._foreach_add_}
+   605002    0.891    0.000    2.071    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\contextlib.py:139(__exit__)
+180000/90000    0.885    0.000    0.971    0.000 {method 'unsqueeze' of 'torch._C.TensorBase' objects}
+30000/15000    0.858    0.000    0.978    0.000 {built-in method torch._ops.profiler._record_function_enter_new}
+    15000    0.807    0.000    3.955    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:2438(zero_grad)
+   290000    0.764    0.000   17.990    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\linear.py:115(forward)
+30000/15000    0.687    0.000    0.712    0.000 {method 'to' of 'torch._C.TensorBase' objects}
+  1210004    0.666    0.000    2.522    0.000 {built-in method builtins.next}
+    20000    0.661    0.000   25.268    0.001 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\3642182575.py:1(reward)
+  1210000    0.624    0.000    1.855    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\overrides.py:1930(_pop_mode_temporarily)
+60000/30000    0.622    0.000    0.657    0.000 {built-in method torch._foreach_mul_}
+60000/40000    0.621    0.000    0.638    0.000 {method 'softmax' of 'torch._C.TensorBase' objects}
+    34654    0.614    0.000    0.829    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:253(<genexpr>)
+    10000    0.598    0.000   11.135    0.001 C:\Users\umarzein\Desktop\MolGAN\generator.py:31(forward)
+30000/15000    0.590    0.000    0.602    0.000 {built-in method torch._foreach_addcdiv_}
+   605000    0.565    0.000    0.565    0.000 {built-in method torch._C._pop_torch_function_stack}
+    40000    0.558    0.000    0.558    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:33(remap)
+   605002    0.556    0.000    1.738    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\contextlib.py:279(helper)
+   225000    0.541    0.000    2.140    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:2157(_named_members)
+   225000    0.534    0.000    0.612    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:122(<genexpr>)
+80000/40000    0.517    0.000    0.558    0.000 {method 'tanh' of 'torch._C.TensorBase' objects}
+    15000    0.509    0.000   39.688    0.003 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:368(wrapper)
+   420000    0.498    0.000   24.331    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:84(_get_value)
+    15000    0.494    0.000   32.807    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:279(adamw)
+   829758    0.479    0.000    0.479    0.000 {built-in method builtins.hasattr}
+    15000    0.476    0.000   31.414    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:479(_multi_tensor_adamw)
+    22129    0.467    0.000    0.467    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\zmq\sugar\socket.py:621(send)
+    15000    0.460    0.000    0.460    0.000 {built-in method torch.ones_like}
+   605002    0.458    0.000    1.800    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\contextlib.py:130(__enter__)
+30000/15000    0.456    0.000    0.534    0.000 {built-in method torch._ops.profiler.}
+30000/15000    0.450    0.000    0.465    0.000 {built-in method torch._foreach_lerp_}
+    15000    0.440    0.000    0.440    0.000 {built-in method torch._C._group_tensors_by_device_and_dtype}
+  1170029    0.440    0.000    0.512    0.000 {built-in method builtins.getattr}
+40000/20000    0.438    0.000    0.467    0.000 {method 'sigmoid' of 'torch._C.TensorBase' objects}
+120000/60000    0.437    0.000    0.497    0.000 {built-in method torch._C._set_grad_enabled}
+    19999    0.432    0.000    0.432    0.000 {method 'div' of 'torch._C.TensorBase' objects}
+320000/160000    0.426    0.000    1.440    0.000 {method 'join' of 'str' objects}
+   800000    0.408    0.000    0.567    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\functional.py:345(parse_subscript)
+30000/15000    0.403    0.000    0.421    0.000 {built-in method torch._foreach_addcmul_}
+210000/105000    0.393    0.000    6.066    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:34(wrapped)
+  2269000    0.390    0.000    0.550    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:375(<genexpr>)
+    20000    0.390    0.000    0.390    0.000 {built-in method torch.rsub}
+20000/10000    0.387    0.000    0.423    0.000 {built-in method torch.eye}
+30000/15000    0.383    0.000    0.399    0.000 {built-in method torch._foreach_div_}
+    20000    0.357    0.000    0.357    0.000 {method 'exponential_' of 'torch._C.TensorBase' objects}
+420000/210000    0.352    0.000    0.437    0.000 {built-in method torch.is_complex}
+50000/25000    0.337    0.000    0.369    0.000 {method 'view' of 'torch._C.TensorBase' objects}
+    15000    0.330    0.000    0.330    0.000 {method 'sub' of 'torch._C.TensorBase' objects}
+10084/5042    0.328    0.000    0.341    0.000 {built-in method torch.tensor}
+20000/10000    0.318    0.000    0.326    0.000 {method 'unbind' of 'torch._C.TensorBase' objects}
+    15000    0.315    0.000   37.146    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:58(_use_grad)
+     5000    0.314    0.000    0.334    0.000 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\97489033.py:3(<listcomp>)
+   290000    0.314    0.000   13.193    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\dropout.py:58(forward)
+   492169    0.308    0.000    0.308    0.000 {method 'get' of 'dict' objects}
+20000/10000    0.307    0.000    0.315    0.000 {built-in method torch._C._nn.one_hot}
+   150000    0.302    0.000   41.670    0.000 C:\Users\umarzein\Desktop\MolGAN\mlp.py:29(forward)
+    60000    0.300    0.000    0.300    0.000 {built-in method numpy.array}
+    10000    0.292    0.000    0.292    0.000 {method 'tolist' of 'numpy.ndarray' objects}
+   190000    0.286    0.000    0.445    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\container.py:207(__iter__)
+    10000    0.278    0.000    0.278    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\MolSurf.py:482(<lambda>)
+30000/15000    0.274    0.000   64.670    0.004 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:463(backward)
+    62119    0.265    0.000    7.878    0.000 {built-in method builtins.sum}
+   450000    0.261    0.000    0.389    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_VF.py:26(__getattr__)
+     5000    0.260    0.000    0.260    0.000 {built-in method torch._C._linalg.linalg_vector_norm}
+    20000    0.257    0.000    0.257    0.000 {method 'log' of 'torch._C.TensorBase' objects}
+     7373    0.249    0.000    1.053    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:464(format_meter)
+    20000    0.246    0.000    3.656    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:135(water_octanol_partition_coefficient_scores)
+    15000    0.245    0.000   14.608    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:594(<listcomp>)
+   270000    0.234    0.000    5.084    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\activation.py:355(forward)
+    20000    0.230    0.000    0.786    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\__init__.py:59(_make_grads)
+    10000    0.226    0.000    0.226    0.000 {method 'mul_' of 'torch._C.TensorBase' objects}
+   605000    0.223    0.000    0.788    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\overrides.py:1925(_pop_mode)
+   605000    0.223    0.000    0.443    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\overrides.py:1921(_push_mode)
+   605000    0.221    0.000    0.221    0.000 {built-in method torch._C._push_on_torch_function_stack}
+    40000    0.208    0.000    0.208    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\numpy\core\_methods.py:90(_clip)
+   777211    0.205    0.000    0.205    0.000 {built-in method builtins.isinstance}
+    24654    0.205    0.000    0.211    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\Draw\IPythonConsole.py:215(_GetSubstructMatches)
+    15000    0.193    0.000   36.337    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:151(step)
+    10000    0.188    0.000   16.349    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:270(qed)
+    15000    0.182    0.000   10.149    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:595(<listcomp>)
+   405000    0.180    0.000    0.220    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:2224(<lambda>)
+    20000    0.175    0.000    0.175    0.000 {built-in method torch.empty_like}
+    10000    0.175    0.000    0.175    0.000 {method 'neg' of 'torch._C.TensorBase' objects}
+    15000    0.172    0.000    0.731    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\profiler.py:610(__exit__)
+    20000    0.171    0.000   51.394    0.003 C:\Users\umarzein\Desktop\MolGAN\rewardnet.py:15(forward)
+   240000    0.170    0.000    0.979    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\functional.py:355(<genexpr>)
+   210000    0.169    0.000    0.291    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:97(_dispatch_sqrt)
+   835000    0.168    0.000    0.168    0.000 {built-in method torch._C._has_torch_function_unary}
+    15000    0.164    0.000   63.809    0.004 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\__init__.py:164(backward)
+  2246881    0.160    0.000    0.160    0.000 {built-in method unicodedata.east_asian_width}
+    80000    0.153    0.000    0.184    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:234(ads)
+     5000    0.146    0.000    8.805    0.002 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\1136246996.py:1(gradient_penalty)
+   605000    0.145    0.000    0.145    0.000 {built-in method torch._C._is_torch_function_mode_enabled}
+10000/5000    0.144    0.000    0.156    0.000 {built-in method torch.zeros}
+   630042    0.141    0.000    0.216    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:1034(__hash__)
+834130/834127    0.140    0.000    0.140    0.000 {built-in method builtins.len}
+    60000    0.140    0.000    0.653    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\grad_mode.py:183(__init__)
+10000/5000    0.136    0.000    0.153    0.000 {built-in method torch.rand}
+    20000    0.135    0.000    4.390    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:208(synthetic_accessibility_score_scores)
+   615006    0.132    0.000    0.186    0.000 {method 'add' of 'set' objects}
+    40000    0.121    0.000   60.086    0.002 C:\Users\umarzein\Desktop\MolGAN\rgcn.py:107(forward)
+   605000    0.119    0.000    0.119    0.000 {built-in method torch._C._is_torch_function_enabled}
+10000/5000    0.119    0.000    7.270    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\__init__.py:277(grad)
+10000/5000    0.116    0.000    0.121    0.000 {method 'mean' of 'torch._C.TensorBase' objects}
+10000/5000    0.114    0.000    0.120    0.000 {method 'abs' of 'torch._C.TensorBase' objects}
+10000/5000    0.114    0.000    0.131    0.000 {built-in method torch.ones}
+    15000    0.112    0.000    0.533    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:321(_cuda_graph_capture_health_check)
+    15000    0.112    0.000    0.169    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\profiler.py:593(__init__)
+    15000    0.111    0.000    0.111    0.000 {built-in method torch._C._cuda_isCurrentStreamCapturing}
+     5000    0.111    0.000    0.111    0.000 {method 'pow' of 'torch._C.TensorBase' objects}
+  1109518    0.110    0.000    0.110    0.000 {method 'append' of 'list' objects}
+30000/20000    0.108    0.000    0.132    0.000 {method 'size' of 'torch._C.TensorBase' objects}
+   225000    0.108    0.000    2.248    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:2196(named_parameters)
+     7377    0.105    0.000    0.618    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:655(write)
+   200000    0.105    0.000    0.105    0.000 {built-in method builtins.iter}
+   380000    0.102    0.000    0.102    0.000 {built-in method torch._C._has_torch_function}
+10000/5000    0.101    0.000    0.107    0.000 {built-in method torch.abs}
+    15000    0.099    0.000    1.108    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\profiler.py:604(__enter__)
+     5000    0.098    0.000    0.360    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\functional.py:1495(norm)
+10166/5083    0.095    0.000    0.101    0.000 {built-in method torch.zeros_like}
+   225000    0.092    0.000    2.340    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\module.py:2171(parameters)
+   400000    0.090    0.000    0.239    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\functional.py:359(<genexpr>)
+   640000    0.089    0.000    0.089    0.000 {built-in method builtins.chr}
+    40000    0.085    0.000    0.426    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\numpy\core\fromnumeric.py:2100(clip)
+9998/4999    0.084    0.000    0.089    0.000 {built-in method torch.rand_like}
+   794833    0.083    0.000    0.083    0.000 {built-in method builtins.ord}
+   720000    0.078    0.000    0.078    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_jit_internal.py:1120(is_scripting)
+   810000    0.075    0.000    0.075    0.000 {method 'items' of 'collections.OrderedDict' objects}
+   250000    0.075    0.000    0.075    0.000 {method 'values' of 'collections.OrderedDict' objects}
+   630046    0.075    0.000    0.075    0.000 {built-in method builtins.id}
+    30000    0.072    0.000    0.754    0.000 {built-in method builtins.all}
+    20000    0.071    0.000   16.562    0.001 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:129(quantitative_estimation_druglikeness_scores)
+    15000    0.071    0.000    0.773    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:109(_default_to_fused_or_foreach)
+    10000    0.071    0.000    0.514    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:1012(__iter__)
+    15000    0.071    0.000    0.120    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\os.py:675(__getitem__)
+    22129    0.069    0.000    0.631    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:259(schedule)
+     7377    0.068    0.000    3.808    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:592(flush)
+    25000    0.065    0.000    0.065    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\typing.py:306(inner)
+    20000    0.062    0.000    3.912    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:210(<listcomp>)
+    30000    0.062    0.000    0.062    0.000 {method '__float__' of 'torch._C.TensorBase' objects}
+    40000    0.061    0.000    0.340    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\numpy\core\fromnumeric.py:53(_wrapfunc)
+     7377    0.061    0.000    0.061    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:236(__init__)
+   225000    0.058    0.000    0.070    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:308(<genexpr>)
+    15000    0.056    0.000    0.983    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_contextlib.py:112(decorate_context)
+    15000    0.056    0.000    0.535    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_foreach_utils.py:30(_group_tensors_by_device_and_dtype)
+    14742    0.056    0.000    0.064    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:400(format_interval)
+   495000    0.055    0.000    0.055    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_utils.py:869(is_compiling)
+    40000    0.054    0.000    1.157    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\nn\modules\activation.py:291(forward)
+     7377    0.052    0.000    3.408    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:589(wait)
+    15000    0.052    0.000    0.060    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_contextlib.py:149(__new__)
+    15000    0.052    0.000    0.343    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:599(<listcomp>)
+    10000    0.051    0.000    2.588    0.000 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\591339496.py:1(sample_gumbel)
+25000/15000    0.048    0.000    0.066    0.000 {method 'dim' of 'torch._C.TensorBase' objects}
+     7373    0.047    0.000    1.175    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1150(__str__)
+    15000    0.047    0.000    0.049    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\grad_mode.py:74(__init__)
+     7373    0.047    0.000    0.075    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1446(format_dict)
+     7364    0.047    0.000    3.335    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:288(wait)
+    15000    0.047    0.000    0.155    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_contextlib.py:141(clone)
+   210000    0.046    0.000    0.046    0.000 {built-in method math.sqrt}
+    40000    0.046    0.000    0.254    0.000 {method 'clip' of 'numpy.ndarray' objects}
+20000/10000    0.043    0.000    0.051    0.000 {method 'requires_grad_' of 'torch._C.TensorBase' objects}
+    15000    0.043    0.000    0.043    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\adamw.py:597(<listcomp>)
+    10000    0.043    0.000    0.227    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:287(<listcomp>)
+30000/15000    0.042    0.000    1.009    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_ops.py:750(__call__)
+    29212    0.041    0.000    0.041    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:231(__call__)
+    14750    0.040    0.000    4.466    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:194(inner)
+     7371    0.040    0.000    6.153    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1325(refresh)
+    15000    0.040    0.000    0.040    0.000 {built-in method torch._C._are_functorch_transforms_active}
+    29506    0.040    0.000    0.088    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:1169(is_alive)
+    20000    0.039    0.000    2.522    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:137(<listcomp>)
+    15000    0.039    0.000    0.277    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\cuda\__init__.py:128(is_available)
+10000/5000    0.038    0.000    0.258    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:961(__format__)
+    14746    0.038    0.000    0.081    0.000 {method 'format' of 'str' objects}
+10000/5000    0.038    0.000    0.542    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:728(norm)
+     7373    0.037    0.000    6.022    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1464(display)
+    80006    0.037    0.000    0.037    0.000 {built-in method math.log}
+    20000    0.036    0.000    0.426    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_tensor.py:939(__rsub__)
+10000/5000    0.036    0.000    0.039    0.000 {method 'permute' of 'torch._C.TensorBase' objects}
+    15000    0.036    0.000    0.208    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\cuda\__init__.py:124(_nvml_based_avail)
+    14741    0.035    0.000    0.035    0.000 {built-in method _thread.allocate_lock}
+15000/5000    0.035    0.000    0.054    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\fx\experimental\symbolic_shapes.py:328(sym_eq)
+    10000    0.035    0.000    0.035    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\collections\__init__.py:443(_asdict)
+    14746    0.035    0.000    0.051    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:273(_is_ascii)
+    10002    0.034    0.000    1.873    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1160(__iter__)
+     7373    0.033    0.000    0.039    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:186(__format__)
+   170000    0.033    0.000    0.033    0.000 {built-in method math.exp}
+    90000    0.032    0.000    0.068    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\rdkit\Chem\QED.py:288(<genexpr>)
+    90000    0.031    0.000    0.031    0.000 {built-in method torch.is_grad_enabled}
+    15000    0.031    0.000    0.152    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\grad_mode.py:79(__enter__)
+    15000    0.031    0.000    0.151    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_collections_abc.py:821(get)
+     7373    0.030    0.000    4.495    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:451(fp_write)
+     7373    0.029    0.000    4.804    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:457(print_status)
+     7379    0.029    0.000    0.042    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:106(release)
+    15000    0.029    0.000    1.013    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:396(_group_tensors_by_device_and_dtype)
+     2369    0.028    0.000    1.836    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1198(update)
+    29506    0.027    0.000    0.042    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:1102(_wait_for_tstate_lock)
+     7379    0.027    0.000    0.050    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:102(acquire)
+    22119    0.027    0.000    0.818    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:378(disp_len)
+    10000    0.027    0.000   16.376    0.002 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:132(<lambda>)
+    22119    0.026    0.000    0.766    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:374(_text_width)
+    10000    0.026    0.000    1.205    0.000 C:\Users\umarzein\Desktop\MolGAN\constants.py:31(sample)
+30000/15000    0.026    0.000    0.552    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_ops.py:512(__call__)
+    15000    0.026    0.000    0.049    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\os.py:747(encodekey)
+    22119    0.025    0.000    0.025    0.000 {method 'sub' of 're.Pattern' objects}
+    20000    0.025    0.000   16.413    0.001 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:131(<listcomp>)
+    15000    0.024    0.000    0.038    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_foreach_utils.py:12(_get_fused_kernels_supported_devices)
+    22129    0.024    0.000    0.024    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:138(_event_pipe)
+    15000    0.022    0.000    0.034    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_foreach_utils.py:35(<dictcomp>)
+    20000    0.021    0.000   18.871    0.001 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:26(_avoid_sanitization_error)
+    15000    0.021    0.000    0.172    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\os.py:772(getenv)
+    10000    0.021    0.000    2.474    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:137(<lambda>)
+    20000    0.020    0.000    0.020    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\__init__.py:154(_tensor_or_tensors_to_tuple)
+    10000    0.020    0.000    0.020    0.000 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\1618320290.py:8(<dictcomp>)
+    25004    0.019    0.000    0.019    0.000 {built-in method __new__ of type object at 0x00007FF9509DDF40}
+    15000    0.018    0.000    0.021    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:91(_stack_if_compiling)
+    30003    0.018    0.000    0.018    0.000 {built-in method builtins.hash}
+     5000    0.018    0.000    4.382    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1382(set_description)
+    15000    0.018    0.000    0.018    0.000 {method 'numel' of 'torch._C.TensorBase' objects}
+    15000    0.017    0.000    0.025    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_ops.py:515(__hash__)
+     7373    0.017    0.000    0.021    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:153(__init__)
+    30000    0.017    0.000    0.017    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_dynamo\decorators.py:140(graph_break)
+     7379    0.017    0.000    0.017    0.000 {method 'acquire' of '_multiprocessing.SemLock' objects}
+     7377    0.017    0.000    0.465    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:577(_schedule_flush)
+     7377    0.017    0.000    0.104    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:545(__init__)
+    30000    0.017    0.000    0.017    0.000 {built-in method torch._C._get_privateuse1_backend_name}
+    42377    0.016    0.000    0.016    0.000 {method 'items' of 'dict' objects}
+    15000    0.016    0.000    0.085    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\grad_mode.py:83(__exit__)
+     7369    0.016    0.000    0.016    0.000 {built-in method now}
+    15000    0.016    0.000    0.026    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\_ops.py:694(__hash__)
+    10000    0.014    0.000    0.026    0.000 <string>:1(<lambda>)
+     7377    0.014    0.000    0.020    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:550(_is_master_process)
+125634/125622    0.014    0.000    0.014    0.000 {method 'keys' of 'dict' objects}
+    30000    0.013    0.000    0.013    0.000 {built-in method math.log10}
+     7377    0.013    0.000    0.017    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\iostream.py:505(parent_header)
+     5000    0.013    0.000    0.030    0.000 {built-in method _functools.reduce}
+    15000    0.011    0.000    0.015    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\os.py:741(check_str)
+    15000    0.011    0.000    0.020    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\cuda\__init__.py:119(_is_compiled)
+    14746    0.011    0.000    0.011    0.000 {built-in method builtins.max}
+    15000    0.011    0.000    0.011    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\backends\cuda\__init__.py:30(is_built)
+        1    0.011    0.011   12.334   12.334 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\3200201438.py:14(<listcomp>)
+    15010    0.011    0.000    0.011    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:1145(ident)
+     7377    0.011    0.000    0.014    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:1430(current_thread)
+     7379    0.010    0.000    0.010    0.000 {method 'release' of '_multiprocessing.SemLock' objects}
+    40000    0.010    0.000    0.010    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\numpy\core\fromnumeric.py:2096(_clip_dispatcher)
+   115506    0.010    0.000    0.010    0.000 {method 'index' of 'list' objects}
+    15000    0.010    0.000    0.010    0.000 {built-in method torch._C._cuda_getDeviceCount}
+    30000    0.010    0.000    0.013    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\overrides.py:1823(is_tensor_like)
+    15000    0.010    0.000    0.121    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\cuda\graphs.py:22(is_current_stream_capturing)
+     7377    0.009    0.000    0.011    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:267(__exit__)
+    36857    0.009    0.000    0.009    0.000 {built-in method builtins.divmod}
+     7364    0.009    0.000    0.014    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:276(_acquire_restore)
+    15000    0.009    0.000    0.011    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\utils\_foreach_utils.py:8(_get_foreach_kernels_supported_devices)
+    15000    0.009    0.000    0.009    0.000 {method 'upper' of 'str' objects}
+     7373    0.008    0.000    0.300    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:386(disp_trim)
+     5000    0.007    0.000    0.007    0.000 {method '__format__' of 'float' objects}
+    20000    0.007    0.000    0.009    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\autograd\__init__.py:359(<genexpr>)
+     7377    0.007    0.000    0.009    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:264(__enter__)
+     7377    0.006    0.000    0.006    0.000 {built-in method nt.getpid}
+    30004    0.006    0.000    0.006    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\typing.py:1737(cast)
+     7373    0.006    0.000    0.006    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:108(__init__)
+     7379    0.006    0.000    0.006    0.000 {method 'acquire' of '_thread.RLock' objects}
+    35364    0.006    0.000    0.006    0.000 {method 'extend' of 'list' objects}
+    29493    0.006    0.000    0.006    0.000 {method 'append' of 'collections.deque' objects}
+    29508    0.006    0.000    0.006    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:553(is_set)
+    15000    0.005    0.000    0.005    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\optim\optimizer.py:352(_optimizer_step_code)
+     7364    0.005    0.000    0.007    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:279(_is_owned)
+    14850    0.005    0.000    0.005    0.000 {built-in method time.time}
+    20000    0.005    0.000    0.005    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:139(<lambda>)
+     5000    0.005    0.000    0.006    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\fx\experimental\symbolic_shapes.py:581(expect_true)
+     7373    0.005    0.000    0.005    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:112(__format__)
+     7373    0.005    0.000    0.005    0.000 {method 'update' of 'dict' objects}
+    20000    0.005    0.000    0.005    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:211(<lambda>)
+    20000    0.005    0.000    0.005    0.000 C:\Users\umarzein\Desktop\MolGAN\molecularmetrics.py:131(<lambda>)
+    15000    0.004    0.000    0.004    0.000 {method '__exit__' of 'torch._C.DisableTorchFunctionSubclass' objects}
+    15064    0.004    0.000    0.004    0.000 {method 'values' of 'dict' objects}
+     7373    0.004    0.000    0.004    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:167(colour)
+    15000    0.004    0.000    0.004    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\torch\jit\__init__.py:126(annotate)
+     7377    0.004    0.000    0.004    0.000 {method 'write' of '_io.StringIO' objects}
+     7377    0.004    0.000    0.004    0.000 {method 'get' of '_contextvars.ContextVar' objects}
+     7377    0.003    0.000    0.003    0.000 {built-in method _thread.get_ident}
+     7364    0.003    0.000    0.005    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:273(_release_save)
+     7379    0.003    0.000    0.003    0.000 {method 'release' of '_thread.RLock' objects}
+     7377    0.003    0.000    0.003    0.000 {built-in method builtins.abs}
+     7373    0.002    0.000    0.002    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:163(colour)
+     7377    0.002    0.000    0.002    0.000 {method '__enter__' of '_thread.lock' objects}
+     7409    0.002    0.000    0.002    0.000 {method '__exit__' of '_thread.RLock' objects}
+     7377    0.002    0.000    0.002    0.000 {method '__exit__' of '_thread.lock' objects}
+     7364    0.001    0.000    0.001    0.000 {method 'release' of '_thread.lock' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:297(_screen_shape_windows)
+       64    0.000    0.000    0.001    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\ipkernel.py:770(_clean_thread_parent_frames)
+       32    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\ipykernel\ipkernel.py:785(<setcomp>)
+       32    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\threading.py:1478(enumerate)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.compile}
+        2    0.000    0.000    0.003    0.002 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:952(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\ctypes\__init__.py:48(create_string_buffer)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\frame.py:4050(__getitem__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:1972(get_slice)
+        4    0.000    0.000    0.002    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1265(close)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\base.py:5323(__contains__)
+        2    0.000    0.000    0.001    0.001 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:438(status_printer)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:4339(_getitem_slice)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:686(_decr_instances)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\series.py:1086(__getitem__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\base.py:4201(_convert_slice_indexer)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\range.py:201(_simple_new)
+        6    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:63(__iter__)
+        2    0.000    0.000  316.985  158.493 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\IPython\core\interactiveshell.py:3541(run_code)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:663(__new__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\base.py:836(__iter__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:679(_get_free_pos)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:266(_supports_unicode)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\series.py:1078(_slice)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\frame.py:4614(_get_item_cache)
+        4    0.000    0.000    0.000    0.000 {built-in method fromtimestamp}
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:53(_commit_removals)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:278(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\codeop.py:117(__call__)
+        6    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:213(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:6233(__finalize__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\range.py:1032(_getitem_slice)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1286(fp_write)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:6298(__setattr__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\functools.py:393(__get__)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:27(__exit__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\series.py:664(_constructor_from_mgr)
+        8    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:110(__enter__)
+        3    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:2002(internal_values)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:86(add)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\traitlets\traitlets.py:629(get)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\IPython\core\compilerop.py:180(extra_flags)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:111(remove)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexing.py:2765(check_dict_or_set_indexers)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\traitlets\traitlets.py:676(__get__)
+        2    0.000    0.000    0.000    0.000 {built-in method _struct.unpack}
+        8    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:113(__exit__)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1157(__hash__)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:21(__enter__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\dtypes\inference.py:334(is_hashable)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\AppData\Local\Temp\ipykernel_15932\1027580126.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\_config\__init__.py:34(using_copy_on_write)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:339(_from_mgr)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:187(disable_on_exception)
+        2    0.000    0.000  316.985  158.493 {built-in method builtins.exec}
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\_weakrefset.py:17(__init__)
+        6    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:152(wrapper_setattr)
+        8    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:222(__eq__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:252(_is_utf)
+        3    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\series.py:827(_values)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1053(_handle_fromlist)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\IPython\core\interactiveshell.py:3493(compare)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\common.py:372(apply_if_callable)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\flags.py:51(__init__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexers\utils.py:38(is_valid_positional_slice)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\base.py:74(__len__)
+        6    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:226(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:682(<setcomp>)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:156(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:125(__eq__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\_monitor.py:94(report)
+        4    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1153(_comparable)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\flags.py:87(allows_duplicate_labels)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:760(get_lock)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:139(__getattr__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\range.py:376(dtype)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:1835(__init__)
+        4    0.000    0.000    0.000    0.000 {built-in method _weakref.proxy}
+        4    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1147(__del__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\IPython\core\interactiveshell.py:1277(user_global_ns)
+        2    0.000    0.000    0.000    0.000 {method 'difference' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\base.py:831(_reset_identity)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\indexes\range.py:999(__len__)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\utils.py:282(_screen_shape_wrapper)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\_config\__init__.py:42(warn_copy_on_write)
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:404(flags)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\series.py:660(_constructor)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:1938(_block)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\flags.py:55(allows_duplicate_labels)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:1826(ndim)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\series.py:910(__len__)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\dateutil\tz\tz.py:74(utcoffset)
+        2    0.000    0.000    0.000    0.000 {built-in method sys.audit}
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\generic.py:362(attrs)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:246(items)
+        1    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\pandas\core\internals\managers.py:1987(index)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
+        2    0.000    0.000    0.000    0.000 C:\Users\umarzein\micromamba\envs\drugresearch\lib\site-packages\tqdm\std.py:1301(<lambda>)
+
+
+
