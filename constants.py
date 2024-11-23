@@ -11,22 +11,30 @@ BONDS = {
 }
 
 DEFAULT_DO_RATE = 0.1
-
+#FOR GDB9
 MOLS = {
     6: 'C',
     7: 'N',
     8: 'O',
     9: 'F',
-    15: 'P',
-    16: 'S',
-    17: 'Cl',
-    35: 'Br',
-    53: 'I',
 }
+
+# FOR ZINC250k
+#MOLS = {
+#    6: 'C',
+#    7: 'N',
+#    8: 'O',
+#    9: 'F',
+#    15: 'P',
+#    16: 'S',
+#    17: 'Cl',
+#    35: 'Br',
+#    53: 'I',
+#}
 
 GP_LAMBDA = 10.0#10.0
 
-WGAN_BIAS_LAMBDA = 0.51#0.01
+WGAN_BIAS_LAMBDA = 0.01#0.01
 
 def sample(*shape):
     return torch.randn(*shape)

@@ -12,5 +12,5 @@ class Rewarder(nn.Module):
     def __init__(self, rgcn_dims, i_dims, j_dims, final_mlp_dims, do_rate=DEFAULT_DO_RATE):
         super().__init__()
         self.inner = discriminator.Discriminator(rgcn_dims, i_dims, j_dims, final_mlp_dims, do_rate=do_rate)
-    def forward(self, inputs, use_old=False):
-        return self.inner(inputs, use_old=use_old).sigmoid()
+    def forward(self, inputs, minibatch_sizes=None, use_old=False):
+        return self.inner(inputs, minibatch_sizes=minibatch_sizes, use_old=use_old).sigmoid()

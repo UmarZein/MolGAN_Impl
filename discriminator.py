@@ -26,7 +26,7 @@ class Discriminator(nn.Module):
                                  final_activation=nn.Tanh, dropout_rate=self.do_rate)
         self.final_mlp = mlp.MLP(self.final_mlp_dims[0],self.final_mlp_dims[1:-1],self.final_mlp_dims[-1],
                                  final_activation=None, dropout_rate=self.do_rate)
-    def forward(self, inputs, use_old=False):
+    def forward(self, inputs, minibatch_sizes=None, use_old=False):
         x0,a=inputs
         if use_old:
             h=x0
@@ -37,6 +37,16 @@ class Discriminator(nn.Module):
         h=torch.cat([x0,h],-1)
         i_out = self.i(h)
         j_out = self.j(h)
-        h=(i_out*j_out).sum(-2).tanh()
+        if minibatch_sizes is None:
+            h=(i_out*j_out).sum(-2).tanh()
+        else:
+            assert isinstance(minibatch_sizes,list) or isinstance(minibatch_sizes,tuple) or isinstance(minibatch_sizes,torch.Tensor), "minibatch_sizes must be a list of ints, representing the vertex count of each graph within the inputs"
+            new_h=torch.zeros_like(h[...,:len(minibatch_sizes),:])#...,len(minibatch_sizes),h.shape[-1])
+            cumsum=0
+            for i,size in enumerate(minibatch_sizes):
+                new_h[...,i,:]=h[...,cumsum:cumsum+size,:].sum(-2)
+                cumsum+=size
+            h=new_h
+        print("h:",h.shape)
         h=self.final_mlp(h)
         return h
