@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 from constants import *
-
+from torch_geometric.conv import 
 class RGCNLayer(nn.Module):
     'https://arxiv.org/pdf/1703.06103'
     def __init__(self, in_dim, out_dim, do_rate, activation=nn.Tanh):

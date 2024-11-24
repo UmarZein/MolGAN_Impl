@@ -37,14 +37,15 @@ class Discriminator(nn.Module):
         h=torch.cat([x0,h],-1)
         i_out = self.i(h)
         j_out = self.j(h)
+        h=(i_out*j_out)
         if minibatch_sizes is None:
-            h=(i_out*j_out).sum(-2).tanh()
+            h=h.sum(-2).tanh()
         else:
             assert isinstance(minibatch_sizes,list) or isinstance(minibatch_sizes,tuple) or isinstance(minibatch_sizes,torch.Tensor), "minibatch_sizes must be a list of ints, representing the vertex count of each graph within the inputs"
             new_h=torch.zeros_like(h[...,:len(minibatch_sizes),:])#...,len(minibatch_sizes),h.shape[-1])
             cumsum=0
             for i,size in enumerate(minibatch_sizes):
-                new_h[...,i,:]=h[...,cumsum:cumsum+size,:].sum(-2)
+                new_h[...,i,:]=h[...,cumsum:cumsum+size,:].sum(-2).tanh()
                 cumsum+=size
             h=new_h
         print("h:",h.shape)
