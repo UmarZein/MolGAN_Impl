@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from constants import *
+from utils import *
 import mlp
 
 class Generator(nn.Module):
@@ -29,6 +30,7 @@ class Generator(nn.Module):
         self.a_mlp = mlp.MLP(a_dims[0],a_dims[1:-1],a_dims[-1],final_activation=None, dropout_rate=self.do_rate)
         self.x_mlp = mlp.MLP(x_dims[0],x_dims[1:-1],x_dims[-1],final_activation=None, dropout_rate=self.do_rate)
     def forward(self, z):
+        zshape=z.shape
         base=self.main_mlp(z)
         a=self.a_mlp(base).view(-1,len(BONDS), self.N, self.N)
         
@@ -45,7 +47,11 @@ class Generator(nn.Module):
                                     # Also, think about it, in molecules, atoms are not connected to themselves 
         
         x=self.x_mlp(base).view(-1,self.N,len(MOLS))
-
+        a+=a.transpose(-1,-2).clone()
         a=a.softmax(-3)#softmax over the relation-type dimension
         x=x.softmax(-1)#softmax over the atom_type dimension
-        return (x,a)
+        if len(zshape)==1:
+            assert x.shape[0]==1 and a.shape[0]==1, "if z is 1-dim, therefor unbatched, x and a should be shaped (1, ...)"
+            x=x[0]
+            a=a[0]
+        return data_from_graph_and_try_batch(x,a)

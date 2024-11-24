@@ -2,6 +2,7 @@ import torch
 from torch import nn
 from constants import *
 from rgcn import RGCN
+from torch_geometric.data import Data
 import mlp
 
 # Rewarder and discriminator are largely the same thing
@@ -26,28 +27,22 @@ class Discriminator(nn.Module):
                                  final_activation=nn.Tanh, dropout_rate=self.do_rate)
         self.final_mlp = mlp.MLP(self.final_mlp_dims[0],self.final_mlp_dims[1:-1],self.final_mlp_dims[-1],
                                  final_activation=None, dropout_rate=self.do_rate)
-    def forward(self, inputs, minibatch_sizes=None, use_old=False):
-        x0,a=inputs
-        if use_old:
-            h=x0
-            for l in self.layers:
-                h,_=l((h,a),use_old=True)
-        else:
-            h,_= self.layers(inputs)#(B, N, H)
-        h=torch.cat([x0,h],-1)
+    def forward(self, data):
+        assert isinstance(data, Data), 'data must be a torch_geometric.data.Data'
+        x, edge_index, edge_type = data.x, data.edge_index, data.edge_attr
+        batch_ptr = getattr(data, 'ptr', None)
+        data = self.layers(data)
+        h = data.x
+        h = torch.cat([x,h],-1)
         i_out = self.i(h)
         j_out = self.j(h)
-        h=(i_out*j_out)
-        if minibatch_sizes is None:
+        h = (i_out*j_out)
+        if batch_ptr is None:
             h=h.sum(-2).tanh()
         else:
-            assert isinstance(minibatch_sizes,list) or isinstance(minibatch_sizes,tuple) or isinstance(minibatch_sizes,torch.Tensor), "minibatch_sizes must be a list of ints, representing the vertex count of each graph within the inputs"
-            new_h=torch.zeros_like(h[...,:len(minibatch_sizes),:])#...,len(minibatch_sizes),h.shape[-1])
-            cumsum=0
-            for i,size in enumerate(minibatch_sizes):
-                new_h[...,i,:]=h[...,cumsum:cumsum+size,:].sum(-2).tanh()
-                cumsum+=size
+            new_h=torch.zeros_like(h[...,:len(batch_ptr)-1,:])#...,len(minibatch_sizes),h.shape[-1])
+            for i in range(len(batch_ptr)-1):
+                new_h[...,i,:]=h[...,batch_ptr[i]:batch_ptr[i+1],:].sum(-2).tanh()
             h=new_h
-        print("h:",h.shape)
         h=self.final_mlp(h)
         return h

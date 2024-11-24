@@ -1,5 +1,6 @@
 import torch
 import rdkit
+from torch_geometric.data import Data
 
 device = torch.cuda.device(0)
 
@@ -18,7 +19,7 @@ MOLS = {
     8: 'O',
     9: 'F',
 }
-
+MAX_N=9#9 for gdb9, 31 for ZINC
 # FOR ZINC250k
 #MOLS = {
 #    6: 'C',
@@ -32,9 +33,9 @@ MOLS = {
 #    53: 'I',
 #}
 
+LR=0.001
+BATCH_SIZE=32
+
 GP_LAMBDA = 10.0#10.0
 
 WGAN_BIAS_LAMBDA = 0.01#0.01
-
-def sample(*shape):
-    return torch.randn(*shape)
