@@ -48,6 +48,6 @@ class Discriminator(nn.Module):
                 new_h[...,i,:]=h[...,cumsum:cumsum+size,:].sum(-2).tanh()
                 cumsum+=size
             h=new_h
-        print("h:",h.shape)
+        #print("h:",h.shape)
         h=self.final_mlp(h)
         return h

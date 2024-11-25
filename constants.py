@@ -31,7 +31,8 @@ MOLS = {
 #    35: 'Br',
 #    53: 'I',
 #}
-
+MAX_N=9#9 for gdb9, 31 for zinc250k
+BATCH_SIZE=32
 GP_LAMBDA = 10.0#10.0
 
 WGAN_BIAS_LAMBDA = 0.01#0.01
